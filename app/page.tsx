@@ -6,20 +6,20 @@ export default function Home() {
       
       {/* NAVBAR */}
       <nav style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '16px 48px', borderBottom: '1px solid #1A2438', background: 'rgba(10,13,22,0.8)', backdropFilter: 'blur(12px)', position: 'sticky', top: 0, zIndex: 100 }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-          <div style={{ width: 32, height: 32, background: 'linear-gradient(135deg, #5B7FFF, #3ECFB2)', borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, fontSize: 14, color: '#fff' }}>Q</div>
-          <span style={{ fontSize: 18, fontWeight: 700, letterSpacing: '-0.02em' }}>QuantosHQ</span>
-        </div>
-        <div style={{ display: 'flex', gap: 32, fontSize: 14, color: '#637A99' }}>
-          <Link href="/dashboard" style={{ cursor: 'pointer', color: '#637A99', textDecoration: 'none' }}>Features</Link>
-          <Link href="/analyse" style={{ cursor: 'pointer', color: '#637A99', textDecoration: 'none' }}>Analyse</Link>
-          <Link href="/dashboard" style={{ cursor: 'pointer', color: '#637A99', textDecoration: 'none' }}>Dashboard</Link>
-        </div>
-        <div style={{ display: 'flex', gap: 12 }}>
-          <Link href="/analyse" style={{ padding: '8px 20px', borderRadius: 8, border: '1px solid #1A2438', background: 'transparent', color: '#D8E0EF', fontFamily: 'Inter', fontSize: 13, cursor: 'pointer', textDecoration: 'none' }}>Log in</Link>
-          <Link href="/dashboard" style={{ padding: '8px 20px', borderRadius: 8, border: 'none', background: 'linear-gradient(135deg, #5B7FFF, #3ECFB2)', color: '#fff', fontFamily: 'Inter', fontSize: 13, fontWeight: 600, cursor: 'pointer', textDecoration: 'none' }}>Get Started</Link>
-        </div>
-      </nav>
+  <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+    <div style={{ width: 32, height: 32, background: 'linear-gradient(135deg, #5B7FFF, #3ECFB2)', borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, fontSize: 14, color: '#fff' }}>Q</div>
+    <span style={{ fontSize: 18, fontWeight: 700, letterSpacing: '-0.02em' }}>QuantosHQ</span>
+  </div>
+  <div style={{ display: 'flex', gap: 32, fontSize: 14, color: '#637A99' }}>
+    <a href="/dashboard" style={{ cursor: 'pointer', color: '#637A99', textDecoration: 'none' }}>Features</a>
+    <a href="/analyse" style={{ cursor: 'pointer', color: '#637A99', textDecoration: 'none' }}>Analyse</a>
+    <a href="/dashboard" style={{ cursor: 'pointer', color: '#637A99', textDecoration: 'none' }}>Dashboard</a>
+  </div>
+  <div style={{ display: 'flex', gap: 12 }}>
+    <a href="/analyse" style={{ padding: '8px 20px', borderRadius: 8, border: '1px solid #1A2438', background: 'transparent', color: '#D8E0EF', fontFamily: 'Inter', fontSize: 13, cursor: 'pointer', textDecoration: 'none' }}>Log in</a>
+    <a href="/dashboard" style={{ padding: '8px 20px', borderRadius: 8, border: 'none', background: 'linear-gradient(135deg, #5B7FFF, #3ECFB2)', color: '#fff', fontFamily: 'Inter', fontSize: 13, fontWeight: 600, cursor: 'pointer', textDecoration: 'none' }}>Get Started</a>
+  </div>
+</nav>
 
       {/* HERO */}
       <section style={{ textAlign: 'center', padding: '100px 48px 80px', position: 'relative' }}>
