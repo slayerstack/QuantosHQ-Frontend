@@ -86,49 +86,70 @@ function heatColor(v) {
 
 export default function Dashboard() {
   const [activeNav, setActiveNav] = useState('Strategies')
+  const [sidebarOpen, setSidebarOpen] = useState(true)
 
   return (
     <div style={{ display: 'flex', height: '100vh', background: '#07090F', color: '#D8E0EF', fontFamily: 'Inter, sans-serif', overflow: 'hidden' }}>
-      
+
       {/* SIDEBAR */}
-      <div style={{ width: 200, background: '#0A0D16', borderRight: '1px solid #1A2438', display: 'flex', flexDirection: 'column', flexShrink: 0 }}>
-        <div style={{ padding: '18px 16px', borderBottom: '1px solid #1A2438', display: 'flex', alignItems: 'center', gap: 10 }}>
-          <div style={{ width: 28, height: 28, background: 'linear-gradient(135deg, #5B7FFF, #3ECFB2)', borderRadius: 7, display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, fontSize: 13, color: '#fff' }}>Q</div>
-          <span style={{ fontSize: 16, fontWeight: 700 }}>Quantos</span>
+      <div style={{ width: sidebarOpen ? 200 : 60, minWidth: sidebarOpen ? 200 : 60, background: '#0A0D16', borderRight: '1px solid #1A2438', display: 'flex', flexDirection: 'column', flexShrink: 0, transition: 'width 0.2s ease' }}>
+
+        <div style={{ padding: '18px 16px', borderBottom: '1px solid #1A2438', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          {sidebarOpen ? (
+            <>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                <div style={{ width: 28, height: 28, background: 'linear-gradient(135deg, #5B7FFF, #3ECFB2)', borderRadius: 7, display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, fontSize: 13, color: '#fff' }}>Q</div>
+                <span style={{ fontSize: 16, fontWeight: 700 }}>Quantos</span>
+              </div>
+              <button onClick={() => setSidebarOpen(false)} style={{ background: 'none', border: 'none', color: '#637A99', cursor: 'pointer', fontSize: 16, padding: 4 }}>←</button>
+            </>
+          ) : (
+            <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+              <button onClick={() => setSidebarOpen(true)} style={{ background: 'none', border: 'none', color: '#637A99', cursor: 'pointer', fontSize: 16, padding: 4 }}>→</button>
+            </div>
+          )}
         </div>
-        
+
         <div style={{ padding: '12px 8px', flex: 1 }}>
           {sidebarItems.map(item => (
             <div key={item.name} onClick={() => setActiveNav(item.name)}
-              style={{ display: 'flex', alignItems: 'center', gap: 9, padding: '8px 10px', borderRadius: 8, marginBottom: 2, cursor: 'pointer', fontSize: 13, fontWeight: 500, background: activeNav === item.name ? 'rgba(91,127,255,0.12)' : 'transparent', color: activeNav === item.name ? '#5B7FFF' : '#637A99' }}>
-              <span>{item.icon}</span>{item.name}
+              style={{ display: 'flex', alignItems: 'center', gap: sidebarOpen ? 9 : 0, padding: '8px 10px', borderRadius: 8, marginBottom: 2, cursor: 'pointer', fontSize: 13, fontWeight: 500, background: activeNav === item.name ? 'rgba(91,127,255,0.12)' : 'transparent', color: activeNav === item.name ? '#5B7FFF' : '#637A99', justifyContent: sidebarOpen ? 'flex-start' : 'center' }}>
+              <span style={{ fontSize: 16 }}>{item.icon}</span>
+              {sidebarOpen && <span>{item.name}</span>}
             </div>
           ))}
-          
-          <div style={{ fontSize: 10, color: '#3D4D6A', letterSpacing: '0.08em', textTransform: 'uppercase', padding: '12px 8px 6px', marginTop: 8 }}>Tools</div>
-          
+
+          {sidebarOpen && <div style={{ fontSize: 10, color: '#3D4D6A', letterSpacing: '0.08em', textTransform: 'uppercase', padding: '12px 8px 6px', marginTop: 8 }}>Tools</div>}
+
           {tools.map(item => (
             <div key={item.name} onClick={() => setActiveNav(item.name)}
-              style={{ display: 'flex', alignItems: 'center', gap: 9, padding: '8px 10px', borderRadius: 8, marginBottom: 2, cursor: 'pointer', fontSize: 13, fontWeight: 500, color: '#637A99' }}>
-              <span>{item.icon}</span>{item.name}
+              style={{ display: 'flex', alignItems: 'center', gap: sidebarOpen ? 9 : 0, padding: '8px 10px', borderRadius: 8, marginBottom: 2, cursor: 'pointer', fontSize: 13, fontWeight: 500, color: '#637A99', justifyContent: sidebarOpen ? 'flex-start' : 'center' }}>
+              <span style={{ fontSize: 16 }}>{item.icon}</span>
+              {sidebarOpen && <span>{item.name}</span>}
             </div>
           ))}
         </div>
-        
+
         <div style={{ padding: 12, borderTop: '1px solid #1A2438' }}>
-          <div style={{ background: 'linear-gradient(135deg, rgba(91,127,255,0.15), rgba(62,207,178,0.1))', border: '1px solid rgba(91,127,255,0.2)', borderRadius: 10, padding: '10px 12px' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 3 }}>
-              <span style={{ fontSize: 12, fontWeight: 600 }}>Pro Plan</span>
-              <span style={{ fontSize: 10, color: '#2ECC8A', fontWeight: 600 }}>Active</span>
+          {sidebarOpen ? (
+            <div style={{ background: 'linear-gradient(135deg, rgba(91,127,255,0.15), rgba(62,207,178,0.1))', border: '1px solid rgba(91,127,255,0.2)', borderRadius: 10, padding: '10px 12px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 3 }}>
+                <span style={{ fontSize: 12, fontWeight: 600 }}>Pro Plan</span>
+                <span style={{ fontSize: 10, color: '#2ECC8A', fontWeight: 600 }}>Active</span>
+              </div>
+              <div style={{ fontSize: 10, color: '#3D4D6A' }}>Renews Feb 1, 2026</div>
             </div>
-            <div style={{ fontSize: 10, color: '#3D4D6A' }}>Renews Feb 1, 2026</div>
-          </div>
+          ) : (
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+              <span style={{ fontSize: 16 }}>⚙</span>
+            </div>
+          )}
         </div>
       </div>
 
       {/* MAIN */}
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
-        
+
         {/* TOPBAR */}
         <div style={{ padding: '14px 20px', borderBottom: '1px solid #1A2438', display: 'flex', alignItems: 'center', gap: 12, background: '#0A0D16', flexShrink: 0 }}>
           <div style={{ flex: 1 }}>
@@ -143,14 +164,14 @@ export default function Dashboard() {
             <option>RSI Mean Reversion</option>
             <option>MACD Crossover</option>
           </select>
-          <button onClick={() => window.location.href = '/analyse'} style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '8px 16px', borderRadius: 8, background: 'linear-gradient(135deg, #5B7FFF, #8BA8FF)', border: 'none', color: '#fff', fontFamily: 'Inter', fontSize: 13, fontWeight: 600, cursor: 'pointer' }}>
+          <a href="/analyse" style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '8px 16px', borderRadius: 8, background: 'linear-gradient(135deg, #5B7FFF, #8BA8FF)', color: '#fff', fontFamily: 'Inter', fontSize: 13, fontWeight: 600, cursor: 'pointer', textDecoration: 'none' }}>
             + Analyse Strategy
-          </button>
+          </a>
         </div>
 
         {/* CONTENT */}
         <div style={{ flex: 1, overflow: 'auto', padding: '16px 20px' }}>
-          
+
           {/* META ROW */}
           <div style={{ display: 'flex', gap: 20, marginBottom: 16, flexWrap: 'wrap' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 12, color: '#637A99' }}>
@@ -188,7 +209,7 @@ export default function Dashboard() {
                   ))}
                 </div>
               </div>
-              <div style={{ height: 180, background: 'linear-gradient(180deg, rgba(232,69,90,0.05) 0%, transparent 100%)', borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', overflow: 'hidden' }}>
+              <div style={{ height: 180, position: 'relative', overflow: 'hidden' }}>
                 <svg width="100%" height="180" viewBox="0 0 600 180" preserveAspectRatio="none">
                   <polyline points="0,40 50,35 100,20 150,45 200,70 250,95 300,115 350,130 400,140 450,145 500,135 550,125" fill="none" stroke="#E8455A" strokeWidth="2"/>
                   <polyline points="0,50 50,45 100,42 150,40 200,42 250,38 300,35 350,32 400,38 450,30 500,25 550,28" fill="none" stroke="#5B7FFF" strokeWidth="2"/>
@@ -223,7 +244,7 @@ export default function Dashboard() {
 
           {/* DRAWDOWN + HEATMAP + CONFIDENCE */}
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 280px', gap: 12, marginBottom: 12 }}>
-            
+
             <div style={{ background: '#0F1420', border: '1px solid #1A2438', borderRadius: 12, padding: 16 }}>
               <div style={{ fontSize: 13, fontWeight: 600, marginBottom: 14 }}>📉 Drawdown Curve</div>
               <div style={{ height: 140, position: 'relative' }}>
@@ -289,7 +310,7 @@ export default function Dashboard() {
 
           {/* TRADE STATS + RECENT BACKTESTS */}
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-            
+
             <div style={{ background: '#0F1420', border: '1px solid #1A2438', borderRadius: 12, padding: 16 }}>
               <div style={{ fontSize: 13, fontWeight: 600, marginBottom: 14 }}>📊 Trade Statistics</div>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8 }}>
@@ -336,7 +357,6 @@ export default function Dashboard() {
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </div>
